@@ -34,6 +34,6 @@ for docid in db.view('_all_docs'):
         id=docid['id']
         data=db[id]
         print (data)
-        CLIENT.prueba0.prueba4.insert(data)
+        CLIENT.prueba.prueba5.insert(data)
     except Exception as e:
         raise e

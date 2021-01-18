@@ -9,13 +9,9 @@ from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 import json
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017")    #('http://115.146.93.184:5984/')
-try:
-    db = myclient["prueba3"]
-    col= db["datos"]
-except:
-    db = myclient["prueba3"]
-    col= db["datos"]
+db_client = pymongo.MongoClient("mongodb://localhost:27017")    #('http://115.146.93.184:5984/')
+prueba = db_client.prueba
+my_posts = prueba.posts
     
 i=1
 for post in get_posts('Fifa',pages=1000,extra_info=True):
@@ -41,7 +37,7 @@ for post in get_posts('Fifa',pages=1000,extra_info=True):
             doc['reactions']={}
         
         doc['post_url']=post['post_url']
-        col.save(doc)
+        my_posts.save(doc)
         
         print('guardado con exito')
     except Exception as e:
