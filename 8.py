@@ -21,23 +21,18 @@ except ConnectionFailure as cf:
     print('MongoDB connection atlas: failed', cf)
 
 DBc = client2.get_database('prueba7')
-db2 = DBc.mongoatlas
+db2 = DBc.couchmongo
 
 for db in DBS:
-    if db not in ('admin', 'local','config'):  
-        cols = client[db].list_collection_names()  
+    if db in ('prueba7'):  
+        cols = client[db].list_collection_names() 
         for col in cols:
             print('Querying documents from collection {} in database {}'.format(col, db))
             for x in client[db][col].find():  
                 try:
-                    documents=json.loads(json_util.dumps(x))
-                    documents["_id"]=str(documents["_id"]["$oid"])
-                    print(documents)
+                    documents = json.loads(json_util.dumps(x))
                     db2.insert_one(documents)
-                except TypeError as t:
-
-                    print('current document raised error: {}'.format(t))
-                    SKIPPED.append(x)  # creating list of skipped documents for later analysis
-                    continue    # continue to next document
-                except Exception as e:
-                    raise e
+                    print("SAVE")
+                    print(documents)
+                except Exception as error:
+                    print ("Error saving data: %s" % str(error))
