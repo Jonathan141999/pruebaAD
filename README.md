@@ -1,5 +1,5 @@
 # pruebaAD
-Nombre:Jontahna Alquinga
+#Nombre:Jontahna Alquinga
 
 twitter a CouchDb
 
